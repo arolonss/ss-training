@@ -8,10 +8,11 @@ public class PatternProgram {
   public static void printPatternOne() {
 
     System.out.println("1)");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 1; i < 5; i++) {
       printStar(i);
       System.out.println();
     }
+    System.out.println(".........");
 
   }
 
