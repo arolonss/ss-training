@@ -1,11 +1,13 @@
 package com.ss.jb.two;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SumOfInput {
   static Scanner sc = new Scanner(System.in);
 
   public static void main(String[] args) {
+
     System.out.println();
     System.out.println("Welcome to to Sum Machine!");
     System.out.println();
@@ -15,17 +17,58 @@ public class SumOfInput {
   }
 
   public static void getUserInput() {
-    int addendOne = sc.nextInt();
-    System.out.println(addendOne + " + ...");
-    int addendTwo = sc.nextInt();
-    System.out.println(addendOne + " + " + addendTwo + " + ...");
-    int addendThree = sc.nextInt();
-    System.out.println(addendOne + " + " + addendTwo + " + " + addendThree + "...");
-    calcSum(addendOne, addendTwo, addendThree);
+
+    int[] addends = new int[3];
+
+    int counter = 0;
+    int i;
+
+    // 3throws ArrayIndexOutOfBoundsException
+
+    try {
+      while (counter < 3) {
+        i = sc.nextInt();
+        addends[counter] = i;
+        counter++;
+      }
+
+      // System.out.println(addendOne + " + ...");
+
+    } catch (InputMismatchException e) {
+      System.out.println("All three numbers must be integers! Please try again later.");
+      System.exit(0);
+    } finally {
+      calcSum(addends);
+    }
+
   }
 
-  public static void calcSum(int first, int second, int third) {
-    int sum = first + second + third;
-    System.out.println(sum);
+  // public static void checkInput() {
+
+  // }
+
+  public static void calcSum(int[] arr) {
+    int sum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      sum += arr[i];
+    }
+    System.out.println("The sum is " + sum);
   }
 }
+
+// throws InputMismatchException
+// {
+// addendOne = sc.nextInt();
+
+// System.out.println(addendOne + " + ...");
+
+// // addendTwo = sc.nextInt();
+// // System.out.println(addendOne + " + " + addendTwo + " + ...");
+// // addendThree = sc.nextInt();
+// // System.out.println(addendOne + " + " + addendTwo + " + " + addendThree +
+// "...");
+// } catch (InputMismatchException e) {
+// System.out.println("All three numbers must be integers! Please try again.");
+// } finally {
+// calcSum(addendOne, addendTwo, addendThree);
+// }
