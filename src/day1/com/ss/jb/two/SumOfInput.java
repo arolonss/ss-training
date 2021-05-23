@@ -53,6 +53,7 @@ public class SumOfInput {
       sum += arr[i];
     }
     System.out.println("The sum is " + sum);
+    System.exit(0);
   }
 }
 
