@@ -4,7 +4,7 @@ import java.util.Random;
 public class GuessTheNumber {
   static Scanner sc = new Scanner(System.in);
   static Random rand = new Random();
-  static int secretNum = rand.nextInt(100);
+  static int secretNum = rand.nextInt(100) + 1;
   static int guessLimit = 5;
 
   public static void main(String[] args) {
