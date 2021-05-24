@@ -1,6 +1,10 @@
 package com.ss.jb.three;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 import java.util.Scanner;
 
 public class CountTheChar {
@@ -13,6 +17,7 @@ public class CountTheChar {
   private static Scanner sc = new Scanner(System.in);
 
   public static void main(String[] args) {
+    System.out.println();
     System.out.println("Welcome to Count the Char!");
     System.out.println();
     /*
@@ -22,7 +27,7 @@ public class CountTheChar {
      * directory path exists or not.
      */
     // ask user if they want to slect a file or use default file
-    File fileToRead = getUserFile().exists() ? getUserFile() : new File("sample.txt");
+    File fileToRead = getUserFile().exists() ? getUserFile() : useDefaultFile();
     char charToCount = getUserChar();
 
     countCharInFile(fileToRead, charToCount);
@@ -30,20 +35,56 @@ public class CountTheChar {
   }
 
   private static File getUserFile() {
+    System.out.println(
+        "Which file would you like me to examine? If it doesn't exist, I will just use my default file(sample.txt).");
+    String userInput = sc.next();
+    File userFile = new File(userInput);
+    return userFile;
+  }
 
-    return new File("test file");
+  private static File useDefaultFile() {
+    File defaultFile = new File("src/day1/com/ss/jb/three/sample.txt");
+    System.out.println();
+    System.out.println("!!!Using default file!!!");
+    System.out.println();
+    return defaultFile;
   }
 
   private static char getUserChar() {
     System.out.println("Which character would you like me to count for you?");
-    char userChar = sc.next().charAt(0);
-
+    String userInput = sc.next();
+    // converts to one char
+    char userChar = userInput.charAt(0);
+    sc.close();
     return userChar;
   }
 
-  public static int countCharInFile(File f, char c) {
-    System.out.println(f);
-    System.out.println(c);
-    return 1;
+  private static void countCharInFile(File f, char c) {
+
+    int charCount = 0, line;
+
+    System.out.println();
+    try {
+      FileReader fr = new FileReader(f);
+      BufferedReader br = new BufferedReader(fr);
+
+      while ((line = br.read()) != -1) {
+
+        if (line == c) {
+          charCount++;
+        }
+        System.out.println(line);
+        System.out.println(charCount);
+        break;
+      }
+      br.close();
+      fr.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (java.io.IOException e) {
+      e.printStackTrace();
+    }
+
+    System.out.println("I found " + c + " " + charCount + " times in this file.");
   }
 }
