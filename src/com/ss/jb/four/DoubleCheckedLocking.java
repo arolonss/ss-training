@@ -5,7 +5,7 @@ public class DoubleCheckedLocking {
    * Assignment 1 Implement a Singleton with double checked locking.
    */
 
-  // volatile public
+  // volatile if public
   private static DoubleCheckedLocking instance = null;
 
   private DoubleCheckedLocking() {
@@ -19,11 +19,12 @@ public class DoubleCheckedLocking {
 
     // like wise, we could block the entire class. but we have a private constructr
     // so we dont need it
-    // synchronized (DoubleCheckedLocking.class) {
-    synchronized (instance) {
-      if (instance == null) {
-        instance = new DoubleCheckedLocking();
-      }
+    if (instance == null) {
+      synchronized(instance) {
+        if (instance == null) {
+          instance = new DoubleCheckedLocking();
+        }
+      }  
     }
     return instance;
   }
