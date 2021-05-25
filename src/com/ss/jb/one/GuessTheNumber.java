@@ -1,3 +1,5 @@
+package com.ss.jb.one;
+
 import java.util.Scanner;
 import java.util.Random;
 

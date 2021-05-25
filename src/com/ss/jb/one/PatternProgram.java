@@ -1,3 +1,4 @@
+package com.ss.jb.one;
 
 public class PatternProgram {
 
