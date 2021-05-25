@@ -25,7 +25,7 @@ public class FileAndDirList {
 
       showDir(userDir);
     } catch (NullPointerException e) {
-      System.out.println("Not is not a directory! Please try again.");
+      System.out.println("Not a directory! Please try again.");
       getUserDir();
     } finally {
       sc.close();
@@ -34,17 +34,18 @@ public class FileAndDirList {
 
   private static void showDir(File userDir) {
 
-    System.out.println(userDir.getPath());
     File[] dirs = userDir.listFiles();
+
     for (File f : dirs) {
       if (f.isDirectory()) {
         System.out.println(f.getName());
         showDir(f);
       } else if (f.isFile()) {
-        System.out.println(f.getName());
+        System.out.println("--" + f.getName());
+        // System.out.println(f.getPath());
       }
-
     }
+
     System.exit(0);
   }
 }
